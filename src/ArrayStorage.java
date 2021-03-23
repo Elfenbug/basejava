@@ -5,32 +5,36 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    int positionInArray = 0;
 
     void clear() {
         Arrays.fill(storage, null);
     }
 
-    //переделать
     void save(Resume r) {
-        for(int i = 0; i <=storage.length - 1; i++) {
-            storage[i] = r;
-        }
+        storage[positionInArray] = r;
+        positionInArray++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < storage.length - 1; i++) {
+        Resume resume = new Resume();
+        for (int i = 0; i < positionInArray; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                return storage[i];
+                resume = storage[i];
             }
         }
-        return null;
+        return resume;
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < storage.length - 1; i++) {
+        for (int i = 0; i < positionInArray; i++) {
             if(storage[i].uuid.equals(uuid)) {
                 storage[i] = null;
             }
+        }
+        for (int i = 1; i < storage.length-1; i++) {
+            storage[i-1] = storage[i];
+            storage[i] = null;
         }
     }
 
