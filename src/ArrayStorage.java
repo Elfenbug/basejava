@@ -12,8 +12,21 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        storage[positionInArray] = r;
-        positionInArray++;
+        for (int i = 0; i < storage.length; i++) {
+            if (storage[i] == null) {
+                // good result: found an empty slot
+                storage[i] = r;
+                positionInArray = i + 1;
+                return;
+            }
+            if (storage[i].uuid.equals(r.uuid)) {
+                // bad result: found a duplicate
+                System.out.println("ERROR: Resume with " + storage[i].uuid + " is already exist!");
+                return;
+            }
+        }
+        // bad result: storage full
+        System.out.println("ERROR: Storage full");
     }
 
     Resume get(String uuid) {
@@ -42,13 +55,14 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        for(Resume r : storage) {
-            System.out.print(r + " ");
-        }
-        return new Resume[0];
+        return storage;
     }
 
     int size() {
-        return storage.length;
+        int count = 0;
+        for (int i = 0; i < storage.length; i++) {
+            count++;
+        }
+        return count;
     }
 }
