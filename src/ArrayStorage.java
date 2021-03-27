@@ -34,16 +34,15 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         int deletePosition = 0;
-        for (int i = 0; i < count + 1; i++) {
+        for (int i = 0; i < count; i++) {
             if(storage[i].uuid.equals(uuid)) {
                 storage[i] = null;
                 deletePosition = i;
                 count--;
             }
         }
-        for (int i = deletePosition + 1; i <= count; i++) {
-            storage[i - 1] = storage[i];
-            storage[i] = null;
+        for (int i = deletePosition; i <= count; i++) {
+            storage[i] = storage[i + 1];
         }
     }
 
