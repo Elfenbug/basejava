@@ -54,6 +54,7 @@ public class ArrayStorage {
             return;
         }
 
+        printError(resume);
         for(int i = 0; i < count; i++) {
             if(storage[i].toString().equals((resume.toString()))) {
                 System.out.println("ERROR: Резюме с " + storage[i].getUuid() + " уже существует!");
