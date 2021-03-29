@@ -8,40 +8,59 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[10_000];
     int count = 0;
+
+    public boolean printError(Resume resume) {
+        boolean isFindDublicate = false;
+        for(int i = 0; i < count; i++) {
+            if (storage[i].equals(resume)) {
+                return true;
+            }
+        }
+        System.out.println("ERROR: Резюме " + resume.toString() + " не найдено!");
+        return false;
+    }
+
+    public boolean printError(String uuid) {
+        boolean isFindDublicate = false;
+        for(int i = 0; i < count; i++) {
+            if (storage[i].equals(uuid)) {
+                return true;
+            }
+        }
+        System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
+        return false;
+    }
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
         count = 0;
     }
 
-    public void update(Resume r) {
-        boolean isFind = false;
-        for(int i = 0; i < count; i++) {
-            if(storage[i].equals(r)) {
-                storage[i] = r;
-                isFind = true;
+    public void update(Resume resume) {
+        if (printError(resume)) {
+            for (int i = 0; i < count; i++) {
+                if (storage[i].equals(resume)) {
+                    storage[i] = resume;
+                }
             }
-        }
-        if(!isFind) {
-            System.out.println("ERROR: Резюме не найдено!");
         }
     }
 
-    public void save(Resume r) {
+    public void save(Resume resume) {
         if(count == storage.length) {
             System.out.println("ERROR: Хранилище переполнено!");
             return;
         }
 
         for(int i = 0; i < count; i++) {
-            if(storage[i].toString().equals((r.toString()))) {
+            if(storage[i].toString().equals((resume.toString()))) {
                 System.out.println("ERROR: Резюме с " + storage[i].getUuid() + " уже существует!");
                 return;
             }
         }
-        storage[count] = r;
+        storage[count] = resume;
         count++;
     }
 
@@ -51,7 +70,7 @@ public class ArrayStorage {
                 return storage[i];
             }
         }
-        System.out.println("ERROR: Резюме не найдено!");
+        System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
         return null;
     }
 
@@ -67,7 +86,7 @@ public class ArrayStorage {
             }
         }
         if(!isFind) {
-            System.out.println("ERROR: Резюме не найдено!");
+            System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
             return;
         }
 
