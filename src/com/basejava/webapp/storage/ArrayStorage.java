@@ -12,8 +12,7 @@ public class ArrayStorage {
     int count = 0;
 
     public boolean printError(Resume resume) {
-        boolean isFindDublicate = false;
-        for(int i = 0; i < count; i++) {
+        for(int i = 0; i < count - 1; i++) {
             if (storage[i].equals(resume)) {
                 return true;
             }
@@ -23,8 +22,7 @@ public class ArrayStorage {
     }
 
     public boolean printError(String uuid) {
-        boolean isFindDublicate = false;
-        for(int i = 0; i < count; i++) {
+        for(int i = 0; i < count - 1; i++) {
             if (storage[i].equals(uuid)) {
                 return true;
             }
@@ -40,8 +38,8 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         if (printError(resume)) {
-            for (int i = 0; i < count; i++) {
-                if (storage[i].equals(resume)) {
+            for (int i = 0; i < count - 1; i++) {
+                if (storage[i].equals((resume.toString()))) {
                     storage[i] = resume;
                 }
             }
@@ -54,7 +52,6 @@ public class ArrayStorage {
             return;
         }
 
-        printError(resume);
         for(int i = 0; i < count; i++) {
             if(storage[i].toString().equals((resume.toString()))) {
                 System.out.println("ERROR: Резюме с " + storage[i].getUuid() + " уже существует!");
@@ -66,34 +63,33 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
+        if(!printError(uuid)) {
+            return null;
+        }
         for(int i = 0; i < count; i++) {
             if(storage[i].getUuid().equals(uuid)) {
                 return storage[i];
             }
         }
-        System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
         return null;
     }
 
     public void delete(String uuid) {
-        boolean isFind = false;
         int deletePosition = 0;
-        for(int i = 0; i < count; i++) {
-            if(storage[i].getUuid().equals(uuid)) {
-                storage[i] = null;
-                deletePosition = i;
-                count--;
-                isFind = true;
+        if(printError(uuid)) {
+            for (int i = 0; i < count; i++) {
+                if (storage[i].getUuid().equals(uuid)) {
+                    storage[i] = null;
+                    deletePosition = i;
+                    count--;
+                }
             }
-        }
-        if(!isFind) {
-            System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
-            return;
         }
 
         for(int i = deletePosition; i <= count; i++) {
             storage[i] = storage[i + 1];
         }
+        count--;
     }
 
     /**
