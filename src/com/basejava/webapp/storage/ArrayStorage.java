@@ -11,7 +11,7 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10_000];
     int count = 0;
 
-    public boolean printError(Resume resume) {
+    private boolean isError(Resume resume) {
         for(int i = 0; i < count - 1; i++) {
             if (storage[i].equals(resume)) {
                 return true;
@@ -21,9 +21,9 @@ public class ArrayStorage {
         return false;
     }
 
-    public boolean printError(String uuid) {
+    private boolean isError(String uuid) {
         for(int i = 0; i < count - 1; i++) {
-            if (storage[i].equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return true;
             }
         }
@@ -37,7 +37,7 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        if (printError(resume)) {
+        if (isError(resume)) {
             for (int i = 0; i < count - 1; i++) {
                 if (storage[i].equals((resume.toString()))) {
                     storage[i] = resume;
@@ -63,7 +63,7 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        if(!printError(uuid)) {
+        if(!isError(uuid)) {
             return null;
         }
         for(int i = 0; i < count; i++) {
@@ -76,7 +76,7 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         int deletePosition = 0;
-        if(printError(uuid)) {
+        if(isError(uuid)) {
             for (int i = 0; i < count; i++) {
                 if (storage[i].getUuid().equals(uuid)) {
                     storage[i] = null;
@@ -89,7 +89,6 @@ public class ArrayStorage {
         for(int i = deletePosition; i <= count; i++) {
             storage[i] = storage[i + 1];
         }
-        count--;
     }
 
     /**
