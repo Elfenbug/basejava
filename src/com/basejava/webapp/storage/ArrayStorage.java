@@ -8,8 +8,8 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10_000];
-    int count = 0;
+    private Resume[] storage = new Resume[10_000];
+    private int count = 0;
 
     private boolean isError(Resume resume) {
         for(int i = 0; i < count - 1; i++) {
@@ -63,28 +63,32 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        if(!isError(uuid)) {
+        if(getIndex(uuid) == -1) {
+            System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
             return null;
         }
-        for(int i = 0; i < count; i++) {
-            if(storage[i].getUuid().equals(uuid)) {
-                return storage[i];
-            }
-        }
-        return null;
+        return storage[getIndex(uuid)];
     }
 
     public void delete(String uuid) {
         int deletePosition = 0;
-        if(isError(uuid)) {
-            for (int i = 0; i < count; i++) {
-                if (storage[i].getUuid().equals(uuid)) {
-                    storage[i] = null;
-                    deletePosition = i;
-                    count--;
-                }
-            }
+        if(getIndex(uuid) == -1) {
+            System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
+        } else {
+            storage[getIndex(uuid)] = storage[count - 1];
+            storage[count - 1] = null;
+            count--;
         }
+
+//        if(isError(uuid)) {
+//            for (int i = 0; i < count; i++) {
+//                if (storage[i].getUuid().equals(uuid)) {
+//                    storage[i] = null;
+//                    deletePosition = i;
+//                    count--;
+//                }
+//            }
+//        }
 
         for(int i = deletePosition; i <= count; i++) {
             storage[i] = storage[i + 1];
@@ -95,10 +99,20 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, count);
+        return Arrays.copyOf(storage, count);
     }
 
     public int size() {
         return count;
     }
+
+    private int getIndex(String uuid) {
+        for(int i = 0; i < count; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
