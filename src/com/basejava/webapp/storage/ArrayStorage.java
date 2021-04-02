@@ -18,15 +18,15 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         int index = getStorageIndex(resume);
-            if (storage[index].equals(resume)) {
-                storage[index] = resume;
-                return;
-            }
+        if (index != -1) {
+            storage[index] = resume;
+            return;
+        }
         System.out.println("ERROR: Резюме " + resume.getUuid() + " не найдено!");
     }
 
     private int getStorageIndex(Resume resume) {
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             if (storage[i].getUuid().equals(resume.getUuid())) {
                 return i;
             }
@@ -35,7 +35,7 @@ public class ArrayStorage {
     }
 
     private int getStorageIndex(String uuid) {
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
@@ -59,7 +59,7 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         int index = getStorageIndex(uuid);
-        if(index == -1) {
+        if (index == -1) {
             System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
             return null;
         }
@@ -67,17 +67,15 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        int deletePosition = 0;
         int index = getStorageIndex(uuid);
-        if(index == -1) {
+        if (index == -1) {
             System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
         } else {
-            deletePosition = index;
             storage[index] = null;
             count--;
         }
-        for(int i = deletePosition; i <= count; i++) {
-            storage[i] = storage[i + 1];
+        if (count - index >= 0) {
+            System.arraycopy(storage, index + 1, storage, index, count - index);
         }
     }
 
