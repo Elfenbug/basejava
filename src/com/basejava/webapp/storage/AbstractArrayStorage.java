@@ -13,7 +13,8 @@ public abstract class AbstractArrayStorage implements Storage {
     protected int count = 0;
 
     protected abstract int getStorageIndex(String uuid);
-    protected abstract void insert(Resume resume,int index);
+
+    protected abstract void insert(Resume resume, int index);
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
@@ -26,12 +27,12 @@ public abstract class AbstractArrayStorage implements Storage {
             return;
         }
         int index = getStorageIndex(resume.getUuid());
-        if (index != -1) {
-            System.out.println("ERROR: Резюме с uuid " + resume.getUuid() + " уже существует!");
+        if (index == -1) {
+            insert(resume, count);
+            count++;
             return;
         }
-        insert(resume, index);
-        count++;
+        System.out.println("ERROR: Резюме с uuid " + resume.getUuid() + " уже существует!");
     }
 
     public void delete(String uuid) {
@@ -54,7 +55,7 @@ public abstract class AbstractArrayStorage implements Storage {
         }
         System.out.println("ERROR: Резюме " + resume.getUuid() + " не найдено!");
     }
-    
+
     public Resume get(String uuid) {
         int index = getStorageIndex(uuid);
         if (index == -1) {

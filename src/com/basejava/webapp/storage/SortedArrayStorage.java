@@ -12,16 +12,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         return Arrays.binarySearch(storage, 0, count, searchKey);
     }
 
-//    @Override
-    protected void insertElement(Resume r, int index) {
-//      http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
-        int insertIdx = -index - 1;
-        System.arraycopy(storage, insertIdx, storage, insertIdx + 1, count - insertIdx);
-        storage[insertIdx] = r;
-    }
-
     @Override
     protected void insert(Resume resume, int index) {
-
+        int insertIndex = -index - 1;
+        System.arraycopy(storage, insertIndex, storage, insertIndex + 1, count - insertIndex);
+        storage[insertIndex] = resume;
     }
 }
