@@ -27,7 +27,7 @@ public abstract class AbstractArrayStorage implements Storage {
             return;
         }
         int index = getStorageIndex(resume.getUuid());
-        if (index == -1) {
+        if (index > 0) {
             insert(resume, count);
             count++;
             return;
@@ -49,11 +49,12 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void update(Resume resume) {
         int index = getStorageIndex(resume.getUuid());
-        if (index != -1) {
+        if (index > 0) {
             storage[index] = resume;
-            return;
+        } else {
+            System.out.println("ERROR: Резюме " + resume.getUuid() + " не найдено!");
         }
-        System.out.println("ERROR: Резюме " + resume.getUuid() + " не найдено!");
+
     }
 
     public Resume get(String uuid) {
