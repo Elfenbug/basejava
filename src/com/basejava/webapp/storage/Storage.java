@@ -2,7 +2,7 @@ package com.basejava.webapp.storage;
 
 import com.basejava.webapp.model.Resume;
 
-public interface Strorage {
+public interface Storage {
     void clear();
 
     void update(Resume resume);
