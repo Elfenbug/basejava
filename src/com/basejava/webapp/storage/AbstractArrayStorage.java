@@ -37,11 +37,10 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getStorageIndex(uuid);
         if (index == -1) {
             System.out.println("ERROR: Резюме c uuid " + uuid + " не найдено!");
-        } else {
-            count--;
         }
         if (count - index >= 0) {
             System.arraycopy(storage, index + 1, storage, index, count - index);
+            count--;
         }
     }
 
