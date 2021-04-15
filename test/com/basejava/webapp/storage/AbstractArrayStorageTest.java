@@ -1,23 +1,20 @@
 package com.basejava.webapp.storage;
 
-import com.basejava.webapp.exception.ExistStorageException;
 import com.basejava.webapp.exception.NotExistStorageException;
 import com.basejava.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.security.spec.ECField;
-
 import static org.junit.Assert.*;
 
-public class AbstractArrayStorageTest {
+public abstract class AbstractArrayStorageTest {
     private Storage storage;
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
 
-    public AbstractArrayStorageTest(Storage storage) {
+    protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
 
@@ -31,8 +28,6 @@ public class AbstractArrayStorageTest {
 
     @Test
     public void clear() {
-        storage.clear();
-        Assert.assertEquals(0, storage.size());
     }
 
     @Test
@@ -63,14 +58,5 @@ public class AbstractArrayStorageTest {
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() throws Exception {
         storage.get("dummy");
-    }
-
-    @Test(expected = ExistStorageException.class)
-    public void getExistStorage() throws Exception {
-        storage.save(new Resume(UUID_1));
-    }
-
-    @Test
-    public void getStorage() throws Exception {
     }
 }
