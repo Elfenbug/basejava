@@ -26,13 +26,13 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void save(Resume resume) {
         int index = getStorageIndex(resume.getUuid());
-        if (count == STORAGE_LIMIT) {
-            throw new StorageException("Storage overflow", resume.getUuid());
-        } else if (index < 0) {
-            insert(resume, count);
-            count++;
-        } else {
+        if (index >= 0) {
             throw new ExistStorageException(resume.getUuid());
+        } else if (count == STORAGE_LIMIT) {
+            throw new StorageException("Storage overflow", resume.getUuid());
+        } else {
+            insert(resume, index);
+            count++;
         }
     }
 
