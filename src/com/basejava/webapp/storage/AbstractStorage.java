@@ -2,68 +2,64 @@ package com.basejava.webapp.storage;
 
 import com.basejava.webapp.exception.ExistStorageException;
 import com.basejava.webapp.exception.NotExistStorageException;
-import com.basejava.webapp.exception.StorageException;
 import com.basejava.webapp.model.Resume;
-
-import java.util.Arrays;
 
 public abstract class AbstractStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10_000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
-    protected int count = 0;
 
     protected abstract int getStorageIndex(String uuid);
 
     protected abstract void insert(Resume resume, int index);
 
+    protected abstract boolean isExist(Object index);
+
+    protected abstract void saveResume(Resume resume, Object getStorageIndex);
+
+    protected abstract void deleteResume(Object getStorageIndex);
+
+    protected abstract void updateResume(Resume resume, Object getStorageIndex);
+
+    protected abstract Resume getResume(Object getStorageIndex);
+
     public void save(Resume resume) {
-        int index = getStorageIndex(resume.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else if (count == STORAGE_LIMIT) {
-            throw new StorageException("Storage overflow", resume.getUuid());
-        } else {
-            insert(resume, index);
-            count++;
-        }
+        Object getStorageIndex = getNotExistIndex(resume.getUuid());
+        saveResume(resume, getStorageIndex);
     }
 
     public void delete(String uuid) {
-        int index = getStorageIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        if (count - index >= 0) {
-            System.arraycopy(storage, index + 1, storage, index, count - index);
-            count--;
-        }
+        Object getStorageIndex = getExistIndex(uuid);
+        deleteResume(getStorageIndex);
     }
 
     public void update(Resume resume) {
-        int index = getStorageIndex(resume.getUuid());
-        if (index >= 0) {
-            storage[index] = resume;
-        } else {
-            throw new NotExistStorageException(resume.getUuid());
-        }
+        Object getStorageIndex = getExistIndex(resume.getUuid());
+        updateResume(resume, getStorageIndex);
     }
 
     public Resume get(String uuid) {
-        int index = getStorageIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+        Object getStorageIndex = getExistIndex(uuid);
+        return getResume(getStorageIndex);
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, count);
+    private Object getExistIndex(String uuid) {
+        Object index = getStorageIndex(uuid);
+        if (!isExist(index)) {
+            throw new NotExistStorageException(uuid);
+        }
+        return index;
     }
 
-    public int size() {
-        return count;
+    private Object getNotExistIndex(String uuid) {
+        Object index = getStorageIndex(uuid);
+        if (isExist(index)) {
+            throw new ExistStorageException(uuid);
+        }
+        return index;
     }
+
+
 }
