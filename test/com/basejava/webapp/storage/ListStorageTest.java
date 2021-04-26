@@ -1,8 +1,10 @@
 package com.basejava.webapp.storage;
 
-public class ListStorageTest extends AbstractStorageTest {
+import static org.junit.Assert.*;
 
-    protected ListStorageTest() {
-        super(new ListStorageTest());
+public class ListStorageTest extends AbstractStorageTest {
+    public ListStorageTest() {
+        super(new ListStorage());
     }
+
 }

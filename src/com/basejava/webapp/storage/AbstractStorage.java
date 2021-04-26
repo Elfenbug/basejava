@@ -8,9 +8,7 @@ public abstract class AbstractStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10_000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
 
-    protected abstract int getStorageIndex(String uuid);
-
-    protected abstract void insert(Resume resume, int index);
+    protected abstract Integer getStorageIndex(String uuid);
 
     protected abstract boolean isExist(Object index);
 
