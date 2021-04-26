@@ -10,53 +10,53 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract Integer getStorageIndex(String uuid);
 
-    protected abstract boolean isExist(Object index);
+    protected abstract boolean isExist(Object storageIndex);
 
-    protected abstract void saveResume(Resume resume, Object getStorageIndex);
+    protected abstract void saveResume(Resume resume, Object storageIndex);
 
-    protected abstract void deleteResume(Object getStorageIndex);
+    protected abstract void deleteResume(Object storageIndex);
 
-    protected abstract void updateResume(Resume resume, Object getStorageIndex);
+    protected abstract void updateResume(Resume resume, Object storageIndex);
 
-    protected abstract Resume getResume(Object getStorageIndex);
+    protected abstract Resume getResume(Object storageIndex);
 
     public void save(Resume resume) {
-        Object getStorageIndex = getNotExistIndex(resume.getUuid());
-        saveResume(resume, getStorageIndex);
+        Object storageIndex = getNotExistIndex(resume.getUuid());
+        saveResume(resume, storageIndex);
     }
 
     public void delete(String uuid) {
-        Object getStorageIndex = getExistIndex(uuid);
-        deleteResume(getStorageIndex);
+        Object storageIndex = getExistIndex(uuid);
+        deleteResume(storageIndex);
     }
 
     public void update(Resume resume) {
-        Object getStorageIndex = getExistIndex(resume.getUuid());
-        updateResume(resume, getStorageIndex);
+        Object storageIndex = getExistIndex(resume.getUuid());
+        updateResume(resume, storageIndex);
     }
 
     public Resume get(String uuid) {
-        Object getStorageIndex = getExistIndex(uuid);
-        return getResume(getStorageIndex);
+        Object storageIndex = getExistIndex(uuid);
+        return getResume(storageIndex);
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     private Object getExistIndex(String uuid) {
-        Object index = getStorageIndex(uuid);
-        if (!isExist(index)) {
+        Object storageIndex = getStorageIndex(uuid);
+        if (!isExist(storageIndex)) {
             throw new NotExistStorageException(uuid);
         }
-        return index;
+        return storageIndex;
     }
 
     private Object getNotExistIndex(String uuid) {
-        Object index = getStorageIndex(uuid);
-        if (isExist(index)) {
+        Object storageIndex = getStorageIndex(uuid);
+        if (isExist(storageIndex)) {
             throw new ExistStorageException(uuid);
         }
-        return index;
+        return storageIndex;
     }
 
 
