@@ -5,9 +5,6 @@ import com.basejava.webapp.exception.NotExistStorageException;
 import com.basejava.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected static final int STORAGE_LIMIT = 10_000;
-    protected Resume[] storage = new Resume[STORAGE_LIMIT];
-
     protected abstract Integer getStorageIndex(String uuid);
 
     protected abstract boolean isExist(Object storageIndex);
@@ -40,9 +37,6 @@ public abstract class AbstractStorage implements Storage {
         return getResume(storageIndex);
     }
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
     private Object getExistIndex(String uuid) {
         Object storageIndex = getStorageIndex(uuid);
         if (!isExist(storageIndex)) {

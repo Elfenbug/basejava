@@ -18,7 +18,6 @@ public abstract class AbstractStorageTest {
         this.storage = storage;
     }
 
-
     @Before
     public void setUp() throws Exception {
         storage.clear();
@@ -84,7 +83,7 @@ public abstract class AbstractStorageTest {
     public void getAll() {
         Resume[] assertEquals = {new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
         Resume[] actualResumes = storage.getAll();
-        Assert.assertEquals(assertEquals, actualResumes);
+        Assert.assertArrayEquals(assertEquals, actualResumes);
     }
 
     @Test
