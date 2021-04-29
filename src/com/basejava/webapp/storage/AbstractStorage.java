@@ -5,7 +5,7 @@ import com.basejava.webapp.exception.NotExistStorageException;
 import com.basejava.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected abstract Integer getStorageIndex(String uuid);
+    protected abstract Object getStorageIndex(String uuid);
 
     protected abstract boolean isExist(Object storageIndex);
 
