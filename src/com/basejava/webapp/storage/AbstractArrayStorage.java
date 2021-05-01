@@ -13,7 +13,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int count = 0;
 
-    protected abstract Integer getStorageIndex(String uuid);
+    protected abstract Integer getSearchKey(String uuid);
 
     protected abstract void insert(Resume resume, int storageIndex);
 
@@ -23,34 +23,34 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void saveResume(Resume resume, Object storageIndex) {
+    public void saveResume(Resume resume, Object searchKey) {
         if (count == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", resume.getUuid());
         } else {
-            insert(resume, (int) storageIndex);
+            insert(resume, (int) searchKey);
             count++;
         }
     }
 
     @Override
-    public void deleteResume(Object storageIndex) {
-        System.arraycopy(storage, (int) storageIndex + 1, storage, (int) storageIndex, count - (int) storageIndex);
+    public void deleteResume(Object searchKey) {
+        System.arraycopy(storage, (int) searchKey + 1, storage, (int) searchKey, count - (int) searchKey);
         count--;
     }
 
     @Override
-    public void updateResume(Resume resume, Object storageIndex) {
-        storage[(int) storageIndex] = resume;
+    public void updateResume(Resume resume, Object searchKey) {
+        storage[(int) searchKey] = resume;
     }
 
     @Override
-    public Resume getResume(Object storageIndex) {
-        return storage[(int) storageIndex];
+    public Resume getResume(Object searchKey) {
+        return storage[(int) searchKey];
     }
 
     @Override
-    protected boolean isExist(Object storageIndex) {
-        return (Integer) storageIndex >= 0;
+    protected boolean isExist(Object searchKey) {
+        return (Integer) searchKey >= 0;
     }
 
     /**

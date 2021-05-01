@@ -7,7 +7,7 @@ import com.basejava.webapp.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
-    protected Integer getStorageIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < count; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
@@ -17,7 +17,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void insert(Resume resume, int storageIndex) {
+    protected void insert(Resume resume, int searchKey) {
         storage[count] = resume;
     }
 }

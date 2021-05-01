@@ -9,7 +9,7 @@ public class ListStorage extends AbstractStorage {
     private List<Resume> list = new ArrayList<>();
 
     @Override
-    protected Integer getStorageIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUuid().equals(uuid)) {
                 return i;
@@ -19,12 +19,12 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object storageIndex) {
-        return storageIndex != null;
+    protected boolean isExist(Object searchKey) {
+        return searchKey != null;
     }
 
     @Override
-    protected void saveResume(Resume resume, Object storageIndex) {
+    protected void saveResume(Resume resume, Object searchKey) {
         list.add(resume);
     }
 
@@ -34,13 +34,13 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume, Object storageIndex) {
-        list.set((Integer) storageIndex, resume);
+    protected void updateResume(Resume resume, Object searchKey) {
+        list.set((Integer) searchKey, resume);
     }
 
     @Override
-    protected Resume getResume(Object storageIndex) {
-        return list.get((Integer) storageIndex);
+    protected Resume getResume(Object searchKey) {
+        return list.get((Integer) searchKey);
     }
 
     @Override

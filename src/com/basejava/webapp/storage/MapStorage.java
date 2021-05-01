@@ -9,7 +9,7 @@ public class MapStorage extends AbstractStorage {
     private Map<String, Resume> map = new LinkedHashMap<>();
 
     @Override
-    protected String getStorageIndex(String uuid) {
+    protected String getSearchKey(String uuid) {
         return uuid;
     }
 
