@@ -15,7 +15,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract Integer getSearchKey(String uuid);
 
-    protected abstract void insert(Resume resume, int storageIndex);
+    protected abstract void insert(Resume resume, int searchKey);
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
