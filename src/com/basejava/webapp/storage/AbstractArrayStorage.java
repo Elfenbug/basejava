@@ -13,7 +13,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int count = 0;
 
-    protected abstract Integer getStorageIndex(String uuid);
+    protected abstract Integer getSearchKey(String uuid);
 
     protected abstract void insert(Resume resume, int storageIndex);
 

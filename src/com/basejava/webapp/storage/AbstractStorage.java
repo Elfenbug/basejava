@@ -5,7 +5,7 @@ import com.basejava.webapp.exception.NotExistStorageException;
 import com.basejava.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected abstract Object getStorageIndex(String uuid);
+    protected abstract Object getSearchKey(String uuid);
 
     protected abstract boolean isExist(Object storageIndex);
 
@@ -38,7 +38,7 @@ public abstract class AbstractStorage implements Storage {
     }
 
     private Object getExistIndex(String uuid) {
-        Object storageIndex = getStorageIndex(uuid);
+        Object storageIndex = getSearchKey(uuid);
         if (!isExist(storageIndex)) {
             throw new NotExistStorageException(uuid);
         }
@@ -46,7 +46,7 @@ public abstract class AbstractStorage implements Storage {
     }
 
     private Object getNotExistIndex(String uuid) {
-        Object storageIndex = getStorageIndex(uuid);
+        Object storageIndex = getSearchKey(uuid);
         if (isExist(storageIndex)) {
             throw new ExistStorageException(uuid);
         }
