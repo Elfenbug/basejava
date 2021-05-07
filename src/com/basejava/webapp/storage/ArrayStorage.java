@@ -2,6 +2,8 @@ package com.basejava.webapp.storage;
 
 import com.basejava.webapp.model.Resume;
 
+import java.util.List;
+
 /**
  * Array based storage for Resumes
  */
@@ -19,5 +21,10 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     protected void insert(Resume resume, int searchKey) {
         storage[count] = resume;
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        return null;
     }
 }
