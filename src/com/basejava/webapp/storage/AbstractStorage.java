@@ -7,52 +7,52 @@ import com.basejava.webapp.model.Resume;
 import java.util.List;
 
 public abstract class AbstractStorage implements Storage {
-    protected abstract Object getStorageIndex(String uuid);
+    protected abstract Object getSearchKey(String uuid);
 
-    protected abstract boolean isExist(Object storageIndex);
+    protected abstract boolean isExist(Object searchKey);
 
-    protected abstract void saveResume(Resume resume, Object storageIndex);
+    protected abstract void saveResume(Resume resume, Object searchKey);
 
-    protected abstract void deleteResume(Object storageIndex);
+    protected abstract void deleteResume(Object searchKey);
 
-    protected abstract void updateResume(Resume resume, Object storageIndex);
+    protected abstract void updateResume(Resume resume, Object searchKey);
 
-    protected abstract Resume getResume(Object storageIndex);
+    protected abstract Resume getResume(Object searchKey);
 
     public void save(Resume resume) {
-        Object storageIndex = getNotExistIndex(resume.getUuid());
-        saveResume(resume, storageIndex);
+        Object searchKey = getNotExistSearchKey(resume.getUuid());
+        saveResume(resume, searchKey);
     }
 
     public void delete(String uuid) {
-        Object storageIndex = getExistIndex(uuid);
-        deleteResume(storageIndex);
+        Object searchKey = getExistSearchKey(uuid);
+        deleteResume(searchKey);
     }
 
     public void update(Resume resume) {
-        Object storageIndex = getExistIndex(resume.getUuid());
-        updateResume(resume, storageIndex);
+        Object searchKey = getExistSearchKey(resume.getUuid());
+        updateResume(resume, searchKey);
     }
 
     public Resume get(String uuid) {
-        Object storageIndex = getExistIndex(uuid);
-        return getResume(storageIndex);
+        Object searchKey = getExistSearchKey(uuid);
+        return getResume(searchKey);
     }
 
-    private Object getExistIndex(String uuid) {
-        Object storageIndex = getStorageIndex(uuid);
-        if (!isExist(storageIndex)) {
+    private Object getExistSearchKey(String uuid) {
+        Object searchKey = getSearchKey(uuid);
+        if (!isExist(searchKey)) {
             throw new NotExistStorageException(uuid);
         }
-        return storageIndex;
+        return searchKey;
     }
 
-    private Object getNotExistIndex(String uuid) {
-        Object storageIndex = getStorageIndex(uuid);
-        if (isExist(storageIndex)) {
+    private Object getNotExistSearchKey(String uuid) {
+        Object searchKey = getSearchKey(uuid);
+        if (isExist(searchKey)) {
             throw new ExistStorageException(uuid);
         }
-        return storageIndex;
+        return searchKey;
     }
 
 //    public List<Resume> getAllSorted() {
