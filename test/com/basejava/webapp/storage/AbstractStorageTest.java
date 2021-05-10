@@ -34,7 +34,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        Resume resume = new Resume(UUID_4);
+        Resume resume = new Resume(UUID_4, "fullName4");
         storage.save(resume);
         Assert.assertEquals(4, storage.size());
         Assert.assertEquals(resume, storage.get(UUID_4));
@@ -59,7 +59,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        Resume testResume = new Resume(UUID_1);
+        Resume testResume = new Resume(UUID_1, "fullName");
         storage.update(testResume);
         Assert.assertSame(testResume, storage.get(UUID_1));
     }
@@ -70,8 +70,9 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void get() {
-        Assert.assertEquals(new Resume(UUID_1), storage.get(UUID_1));
+    public void get() throws Exception {
+        Resume testResume = new Resume(UUID_1, "fullName");
+        Assert.assertEquals(new Resume(UUID_1, "fullName"), storage.get(testResume.getUuid()));
     }
 
     @Test(expected = NotExistStorageException.class)
