@@ -19,8 +19,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         storage[insertIndex] = resume;
     }
 
-    @Override
-    public List<Resume> getAllSorted() {
-        return null;
-    }
+//    @Override
+//    public List<Resume> getAllSorted() {
+//        return null;
+//    }
 }

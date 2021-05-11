@@ -46,7 +46,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public Resume getResume(Object searchKey) {
-        return storage[(int) searchKey];
+        return storage[(Integer) searchKey];
     }
 
     @Override
