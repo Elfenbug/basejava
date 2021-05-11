@@ -2,6 +2,7 @@ package com.basejava.webapp.storage;
 
 import com.basejava.webapp.model.Resume;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,14 +41,19 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
+    public List<Resume> getAllResume() {
+        return new ArrayList<>(map.values());
+    }
+
+    @Override
     public void clear() {
         map.clear();
     }
 
-    @Override
-    public Resume[] getAll() {
-        return map.values().toArray(new Resume[0]);
-    }
+//    @Override
+//    public Resume[] getAll() {
+//        return map.values().toArray(new Resume[0]);
+//    }
 
     @Override
     public List<Resume> getAllSorted() {
