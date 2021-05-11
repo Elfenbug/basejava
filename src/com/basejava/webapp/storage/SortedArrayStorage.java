@@ -3,7 +3,6 @@ package com.basejava.webapp.storage;
 import com.basejava.webapp.model.Resume;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
@@ -18,9 +17,4 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         System.arraycopy(storage, insertIndex, storage, insertIndex + 1, count - insertIndex);
         storage[insertIndex] = resume;
     }
-
-//    @Override
-//    public List<Resume> getAllSorted() {
-//        return null;
-//    }
 }
