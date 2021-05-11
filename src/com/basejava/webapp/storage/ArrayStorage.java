@@ -22,9 +22,4 @@ public class ArrayStorage extends AbstractArrayStorage {
     protected void insert(Resume resume, int searchKey) {
         storage[count] = resume;
     }
-
-    @Override
-    public List<Resume> getAllSorted() {
-        return null;
-    }
 }
