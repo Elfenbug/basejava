@@ -29,6 +29,14 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public AbstractSection getSection(SectionType type) {
+        return sections.get(type);
+    }
+
     @Override
     public String toString() {
         return uuid;
