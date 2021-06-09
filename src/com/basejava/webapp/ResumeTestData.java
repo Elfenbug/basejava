@@ -15,7 +15,6 @@ public class ResumeTestData {
     public static void main(String[] args) {
         Resume resume = new Resume("firstName1");
 
-
         TextSection resumeTextObjective = new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям");
 
         TextSection resumeTextPersonal = new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры.");
@@ -105,22 +104,21 @@ public class ResumeTestData {
         Map<ContactType, String> stackOverflow = new EnumMap<>(ContactType.class);
         Map<ContactType, String> homePage = new EnumMap<>(ContactType.class);
 
-        Map<SectionType, AbstractSection> position = new EnumMap<>(SectionType.class);
-        Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
-
         phoneNumber.put(ContactType.PHONE,"+7(921) 855-0482");
         skype.put(ContactType.SKYPE,"grigory.kislin");
-        mail.put(ContactType.SKYPE,"gkislin@yandex.ru");
+        mail.put(ContactType.MAIL,"gkislin@yandex.ru");
         linkedIn.put(ContactType.LINKEDIN,"https://www.linkedin.com/in/gkislin");
         gitHub.put(ContactType.GITHUB,"https://github.com/gkislin");
         stackOverflow.put(ContactType.STACKOVERFLOW,"https://stackoverflow.com/users/548473");
         homePage.put(ContactType.HOME_PAGE,"https://stackoverflow.com/users/548473");
 
-        position.put(SectionType.OBJECTIVE, resumeTextObjective);
-        position.put(SectionType.PERSONAL, resumeTextPersonal);
-        position.put(SectionType.ACHIEVEMENT, resumeAchievements);
-        position.put(SectionType.QUALIFICATIONS, resumeQualification);
-        position.put(SectionType.EXPERIENCE, resumeExperienceWorkJavaOnlineProjects);
+        Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
+        sections.put(SectionType.OBJECTIVE, resumeTextObjective);
+        sections.put(SectionType.PERSONAL, resumeTextPersonal);
+        sections.put(SectionType.ACHIEVEMENT, resumeAchievements);
+        sections.put(SectionType.QUALIFICATIONS, resumeQualification);
+        sections.put(SectionType.EXPERIENCE, resumeExperienceWorkJavaOnlineProjects);
+        sections.put(SectionType.EDUCATION, resumeExperienceWorkLearnLuxoft);
 
 //        Map<String, Resume> map = new HashMap<>();
 //        map.put(UUID_1, RESUME_1);
@@ -128,7 +126,7 @@ public class ResumeTestData {
 //        map.put(UUID_3, RESUME_3);
 
 
-        for (Map.Entry<SectionType, AbstractSection> entry : position.entrySet()) {
+        for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
             System.out.println(entry.getValue());
         }
 
