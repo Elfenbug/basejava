@@ -5,6 +5,7 @@ import com.basejava.webapp.storage.ArrayStorage;
 
 import java.time.LocalDate;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.time.LocalDate.now;
@@ -96,22 +97,16 @@ public class ResumeTestData {
         ExperienceWork resumeExperienceWorkLearnItmoZaochno= new ExperienceWork("http://www.school.mipt.ru/", LocalDate.of(1984, 9, 1), LocalDate.of(1987, 6, 6), "Закончил с отличием","-");
 
 
-        Map<ContactType, String> phoneNumber = new EnumMap<>(ContactType.class);
-        Map<ContactType, String> skype = new EnumMap<>(ContactType.class);
-        Map<ContactType, String> mail = new EnumMap<>(ContactType.class);
-        Map<ContactType, String> linkedIn = new EnumMap<>(ContactType.class);
-        Map<ContactType, String> gitHub = new EnumMap<>(ContactType.class);
-        Map<ContactType, String> stackOverflow = new EnumMap<>(ContactType.class);
-        Map<ContactType, String> homePage = new EnumMap<>(ContactType.class);
+        Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+        contacts.put(ContactType.PHONE,"+7(921) 855-0482");
+        contacts.put(ContactType.SKYPE,"grigory.kislin");
+        contacts.put(ContactType.MAIL,"gkislin@yandex.ru");
+        contacts.put(ContactType.LINKEDIN,"https://www.linkedin.com/in/gkislin");
+        contacts.put(ContactType.GITHUB,"https://github.com/gkislin");
+        contacts.put(ContactType.STACKOVERFLOW,"https://stackoverflow.com/users/548473");
+        contacts.put(ContactType.HOME_PAGE,"https://stackoverflow.com/users/548473");
 
-        phoneNumber.put(ContactType.PHONE,"+7(921) 855-0482");
-        skype.put(ContactType.SKYPE,"grigory.kislin");
-        mail.put(ContactType.MAIL,"gkislin@yandex.ru");
-        linkedIn.put(ContactType.LINKEDIN,"https://www.linkedin.com/in/gkislin");
-        gitHub.put(ContactType.GITHUB,"https://github.com/gkislin");
-        stackOverflow.put(ContactType.STACKOVERFLOW,"https://stackoverflow.com/users/548473");
-        homePage.put(ContactType.HOME_PAGE,"https://stackoverflow.com/users/548473");
-
+        List<ExperienceSection> experienceSections = new ExperienceSection(resumeExperienceWorkJavaOnlineProjects);
         Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
         sections.put(SectionType.OBJECTIVE, resumeTextObjective);
         sections.put(SectionType.PERSONAL, resumeTextPersonal);
@@ -119,12 +114,6 @@ public class ResumeTestData {
         sections.put(SectionType.QUALIFICATIONS, resumeQualification);
         sections.put(SectionType.EXPERIENCE, resumeExperienceWorkJavaOnlineProjects);
         sections.put(SectionType.EDUCATION, resumeExperienceWorkLearnLuxoft);
-
-//        Map<String, Resume> map = new HashMap<>();
-//        map.put(UUID_1, RESUME_1);
-//        map.put(UUID_2, RESUME_2);
-//        map.put(UUID_3, RESUME_3);
-
 
         for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
             System.out.println(entry.getValue());
