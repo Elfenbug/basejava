@@ -8,7 +8,6 @@ import java.util.*;
 
 public class ResumeTestData {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
-    Collection<Resume> collection = new ArrayList<>();
 
     public static void main(String[] args) {
         Resume resume = new Resume("firstName1");
@@ -113,17 +112,6 @@ public class ResumeTestData {
 
         for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
             System.out.println(entry.getValue());
-        }
-
-        printAll();
-
-        System.out.println("Size: " + ARRAY_STORAGE.size());
-    }
-
-    static void printAll() {
-        System.out.println("\nGet All");
-        for (Resume r : ARRAY_STORAGE.getAllSorted()) {
-            System.out.println(r);
         }
     }
 }
