@@ -4,14 +4,11 @@ import com.basejava.webapp.model.*;
 import com.basejava.webapp.storage.ArrayStorage;
 
 import java.time.LocalDate;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-
-import static java.time.LocalDate.now;
+import java.util.*;
 
 public class ResumeTestData {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    Collection<Resume> collection = new ArrayList<>();
 
     public static void main(String[] args) {
         Resume resume = new Resume("firstName1");
@@ -106,7 +103,6 @@ public class ResumeTestData {
         contacts.put(ContactType.STACKOVERFLOW,"https://stackoverflow.com/users/548473");
         contacts.put(ContactType.HOME_PAGE,"https://stackoverflow.com/users/548473");
 
-        List<ExperienceSection> experienceSections = new ExperienceSection(resumeExperienceWorkJavaOnlineProjects);
         Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
         sections.put(SectionType.OBJECTIVE, resumeTextObjective);
         sections.put(SectionType.PERSONAL, resumeTextPersonal);
@@ -118,16 +114,6 @@ public class ResumeTestData {
         for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
             System.out.println(entry.getValue());
         }
-
-
-
-//        ARRAY_STORAGE.save(r1);
-//        r1.getContact(ContactType.PHONE);
-//        System.out.println();
-//        System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
-//        System.out.println("Size: " + ARRAY_STORAGE.size());
-
-        //System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
         printAll();
 
