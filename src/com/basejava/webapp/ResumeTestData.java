@@ -90,7 +90,7 @@ public class ResumeTestData {
 
 
         Map<SectionType, ArrayList<ExperienceWork>> experienceWork = new EnumMap<>(SectionType.class);
-        List<ExperienceWork> listWork = new ArrayList<>();
+        ArrayList<ExperienceWork> listWork = new ArrayList<>();
 
         listWork.add(resumeExperienceWorkJavaOnlineProjects);
         listWork.add(resumeExperienceWorkWrike);
@@ -104,7 +104,7 @@ public class ResumeTestData {
         ExperienceSection es = new ExperienceSection(listWork);
         System.out.println(es);
 
-//        experienceWork.put(SectionType.EXPERIENCE, listWork);
+        experienceWork.put(SectionType.EXPERIENCE, listWork);
 
         Map<SectionType, ArrayList<ExperienceWork>> education = new EnumMap<>(SectionType.class);
         ArrayList<ExperienceWork> listEducation = new ArrayList<>();
@@ -117,6 +117,8 @@ public class ResumeTestData {
         listEducation.add(resumeExperienceWorkLearnItmoZaochno);
 
         education.put(SectionType.EDUCATION, listEducation);
+
+
 
 //        for (Map.Entry<ContactType, String> entry : contacts.entrySet()) {
 //            System.out.println(entry.getValue());
