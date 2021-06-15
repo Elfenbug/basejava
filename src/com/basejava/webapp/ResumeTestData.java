@@ -89,7 +89,7 @@ public class ResumeTestData {
         sections.put(SectionType.QUALIFICATIONS, resumeQualification);
 
 
-        //Map<SectionType, ArrayList<ExperienceWork>> experienceWork = new EnumMap<>(SectionType.class);
+        Map<SectionType, ArrayList<ExperienceWork>> experienceWork = new EnumMap<>(SectionType.class);
         List<ExperienceWork> listWork = new ArrayList<>();
 
         listWork.add(resumeExperienceWorkJavaOnlineProjects);
