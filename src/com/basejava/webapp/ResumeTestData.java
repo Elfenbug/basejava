@@ -8,7 +8,6 @@ import java.util.*;
 public class ResumeTestData {
     public static void main(String[] args) {
         Resume resume = new Resume("firstName1");
-        Collection<Resume> collection = new ArrayList<>();
 
         TextSection resumeTextObjective = new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям");
         TextSection resumeTextPersonal = new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры.");
