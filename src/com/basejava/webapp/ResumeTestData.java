@@ -8,6 +8,7 @@ import java.util.*;
 public class ResumeTestData {
     public static void main(String[] args) {
         Resume resume = new Resume("firstName1");
+        Collection<Resume> collection = new ArrayList<>();
 
         TextSection resumeTextObjective = new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям");
         TextSection resumeTextPersonal = new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры.");
@@ -88,10 +89,8 @@ public class ResumeTestData {
         sections.put(SectionType.ACHIEVEMENT, resumeAchievements);
         sections.put(SectionType.QUALIFICATIONS, resumeQualification);
 
-
         Map<SectionType, ArrayList<ExperienceWork>> experienceWork = new EnumMap<>(SectionType.class);
         ArrayList<ExperienceWork> listWork = new ArrayList<>();
-
         listWork.add(resumeExperienceWorkJavaOnlineProjects);
         listWork.add(resumeExperienceWorkWrike);
         listWork.add(resumeExperienceWorkRitCenter);
@@ -101,14 +100,10 @@ public class ResumeTestData {
         listWork.add(resumeExperienceWorkSiemensAG);
         listWork.add(resumeExperienceWorkAlcatel);
 
-        ExperienceSection es = new ExperienceSection(listWork);
-        System.out.println(es);
-
         experienceWork.put(SectionType.EXPERIENCE, listWork);
 
         Map<SectionType, ArrayList<ExperienceWork>> education = new EnumMap<>(SectionType.class);
         ArrayList<ExperienceWork> listEducation = new ArrayList<>();
-
         listEducation.add(resumeExperienceWorkLearnCoursera);
         listEducation.add(resumeExperienceWorkLearnLuxoft);
         listEducation.add(resumeExperienceWorkLearnSiemensAG);
@@ -118,22 +113,29 @@ public class ResumeTestData {
 
         education.put(SectionType.EDUCATION, listEducation);
 
+        ArrayList<Object> listResume = new ArrayList<>();
+        listResume.add(contacts);
+        listResume.add(sections);
+        listResume.add(experienceWork);
+        listResume.add(listEducation);
 
+        Map<Resume, ArrayList> resumeOne = new HashMap<>();
+        resumeOne.put(resume,listResume);
 
-//        for (Map.Entry<ContactType, String> entry : contacts.entrySet()) {
-//            System.out.println(entry.getValue());
-//        }
-//
-//        for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
-//            System.out.println(entry.getValue());
-//        }
-//
-//        for (Map.Entry<SectionType, ArrayList<ExperienceWork>> entry : experienceWork.entrySet()) {
-//            System.out.println(entry.getValue());
-//        }
-//
-//        for (Map.Entry<SectionType, ArrayList<ExperienceWork>> entry : education.entrySet()) {
-//            System.out.println(entry.getValue());
-//        }
+        for (Map.Entry<ContactType, String> entry : contacts.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+
+        for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+
+        for (Map.Entry<SectionType, ArrayList<ExperienceWork>> entry : experienceWork.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+
+        for (Map.Entry<SectionType, ArrayList<ExperienceWork>> entry : education.entrySet()) {
+            System.out.println(entry.getValue());
+        }
     }
 }
