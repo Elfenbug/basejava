@@ -88,7 +88,6 @@ public class ResumeTestData {
         sections.put(SectionType.ACHIEVEMENT, resumeAchievements);
         sections.put(SectionType.QUALIFICATIONS, resumeQualification);
 
-        Map<SectionType, ArrayList<ExperienceWork>> experienceWork = new EnumMap<>(SectionType.class);
         ArrayList<ExperienceWork> listWork = new ArrayList<>();
         listWork.add(resumeExperienceWorkJavaOnlineProjects);
         listWork.add(resumeExperienceWorkWrike);
@@ -99,9 +98,9 @@ public class ResumeTestData {
         listWork.add(resumeExperienceWorkSiemensAG);
         listWork.add(resumeExperienceWorkAlcatel);
 
-        experienceWork.put(SectionType.EXPERIENCE, listWork);
+        ExperienceSection experienceSectionWork = new ExperienceSection(listWork);
+        sections.put(SectionType.EXPERIENCE, experienceSectionWork);
 
-        Map<SectionType, ArrayList<ExperienceWork>> education = new EnumMap<>(SectionType.class);
         ArrayList<ExperienceWork> listEducation = new ArrayList<>();
         listEducation.add(resumeExperienceWorkLearnCoursera);
         listEducation.add(resumeExperienceWorkLearnLuxoft);
@@ -110,31 +109,19 @@ public class ResumeTestData {
         listEducation.add(resumeExperienceWorkLearnItmoOchno);
         listEducation.add(resumeExperienceWorkLearnItmoZaochno);
 
-        education.put(SectionType.EDUCATION, listEducation);
+        ExperienceSection experienceSectionLearn = new ExperienceSection(listEducation);
+        sections.put(SectionType.EXPERIENCE, experienceSectionLearn);
 
         ArrayList<Object> listResume = new ArrayList<>();
         listResume.add(contacts);
         listResume.add(sections);
-        listResume.add(experienceWork);
-        listResume.add(listEducation);
 
-        Map<Resume, ArrayList> resumeOne = new HashMap<>();
+        Map<Resume, ArrayList<Object>> resumeOne = new HashMap<>();
         resumeOne.put(resume, listResume);
 
-        for (Map.Entry<ContactType, String> entry : contacts.entrySet()) {
+        for (Map.Entry<Resume, ArrayList<Object>> entry : resumeOne.entrySet()) {
             System.out.println(entry.getValue());
         }
 
-        for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
-            System.out.println(entry.getValue());
-        }
-
-        for (Map.Entry<SectionType, ArrayList<ExperienceWork>> entry : experienceWork.entrySet()) {
-            System.out.println(entry.getValue());
-        }
-
-        for (Map.Entry<SectionType, ArrayList<ExperienceWork>> entry : education.entrySet()) {
-            System.out.println(entry.getValue());
-        }
     }
 }
