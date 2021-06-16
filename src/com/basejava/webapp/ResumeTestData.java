@@ -120,7 +120,7 @@ public class ResumeTestData {
         listResume.add(listEducation);
 
         Map<Resume, ArrayList> resumeOne = new HashMap<>();
-        resumeOne.put(resume,listResume);
+        resumeOne.put(resume, listResume);
 
         for (Map.Entry<ContactType, String> entry : contacts.entrySet()) {
             System.out.println(entry.getValue());
