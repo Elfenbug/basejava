@@ -122,6 +122,5 @@ public class ResumeTestData {
         for (Map.Entry<Resume, ArrayList<Object>> entry : resumeOne.entrySet()) {
             System.out.println(entry.getValue());
         }
-
     }
 }
