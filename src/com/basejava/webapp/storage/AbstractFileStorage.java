@@ -24,12 +24,21 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public void clear() {
-
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                deleteResume(file);
+            }
+        }
     }
 
     @Override
     public int size() {
-        return 0;
+        String[] list = directory.list();
+        if (list == null) {
+            throw new StorageException("Ошибка чтения директории", null);
+        }
+        return list.length;
     }
 
     @Override
@@ -39,7 +48,11 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void updateResume(Resume resume, File file) {
-
+        try {
+            doWrite(resume, file);
+        } catch (IOException e) {
+            throw new StorageException("File write error", resume.getUuid(), e);
+        }
     }
 
     @Override
@@ -51,22 +64,29 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected void saveResume(Resume resume, File file) {
         try {
             file.createNewFile();
-            doWrite(resume, file);
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
     }
 
-    protected abstract void doWrite(Resume r, File file) throws IOException;
+    protected abstract void doWrite(Resume resume, File file) throws IOException;
+
+    protected abstract Resume readResume(File file) throws IOException;
 
     @Override
     protected Resume getResume(File file) {
-        return null;
+        try {
+            return readResume(file);
+        } catch (IOException e) {
+            throw new StorageException("Ошибка чтения файла", file.getName(), e);
+        }
     }
 
     @Override
     protected void deleteResume(File file) {
-
+        if (!file.delete()) {
+            throw new StorageException("Ошибка удаления файла", file.getName());
+        }
     }
 
     @Override
